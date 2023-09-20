@@ -1,0 +1,141 @@
+cabal-version:      2.4
+name:               benjibot-core
+version:            0.1.0.0
+
+-- A short (one-line) description of the package.
+-- synopsis:
+
+-- A longer description of the package.
+-- description:
+
+-- A URL where users can report bugs.
+-- bug-reports:
+
+-- The license under which the package is released.
+-- license:
+author:             L0neGamer
+maintainer:         benjaminbwm@gmail.com
+
+-- A copyright notice.
+-- copyright:
+-- category:
+extra-source-files: CHANGELOG.md
+
+library
+  exposed-modules:
+    Discord.BenjiBot
+    Discord.BenjiBot.Handler
+    Discord.BenjiBot.Internal.Administration
+    Discord.BenjiBot.Internal.Alias
+    Discord.BenjiBot.Internal.Cache
+    Discord.BenjiBot.Internal.Embed
+    Discord.BenjiBot.Internal.Handler.Command
+    Discord.BenjiBot.Internal.Handler.Event
+    Discord.BenjiBot.Internal.Permission
+    Discord.BenjiBot.Internal.Plugins
+    Discord.BenjiBot.Internal.Types
+    Discord.BenjiBot.Plugins
+    Discord.BenjiBot.Plugins.Administration
+    Discord.BenjiBot.Plugins.Alias
+    Discord.BenjiBot.Plugins.Basic
+    Discord.BenjiBot.Plugins.Ping
+    Discord.BenjiBot.Utility
+    Discord.BenjiBot.Utility.Database
+    Discord.BenjiBot.Utility.Discord
+    Discord.BenjiBot.Utility.Embed
+    Discord.BenjiBot.Utility.Exception
+    Discord.BenjiBot.Utility.Help
+    Discord.BenjiBot.Utility.Parser
+    Discord.BenjiBot.Utility.Permission
+    Discord.BenjiBot.Utility.Random
+    Discord.BenjiBot.Utility.Search
+    Discord.BenjiBot.Utility.SmartParser
+    Discord.BenjiBot.Utility.SmartParser.Interactions
+    Discord.BenjiBot.Utility.SmartParser.SmartParser
+    Discord.BenjiBot.Utility.SmartParser.Types
+    Discord.BenjiBot.Utility.Types
+    Discord.BenjiBot.Utility.Utils
+
+  -- Modules included in this library but not exported.
+  other-modules:      Paths_benjibot_core
+  other-extensions:
+    BangPatterns
+    DeriveGeneric
+    DuplicateRecordFields
+    LambdaCase
+    LiberalTypeSynonyms
+    ScopedTypeVariables
+    TypeApplications
+
+  default-extensions:
+    BangPatterns
+    DataKinds
+    FlexibleContexts
+    FlexibleInstances
+    GADTs
+    LambdaCase
+    MultiParamTypeClasses
+    OverloadedStrings
+    QuasiQuotes
+    RecordWildCards
+    ScopedTypeVariables
+    TupleSections
+    TypeApplications
+
+  build-depends:
+    , aeson                   ^>=2
+    , base                    >=4.15      && <4.18
+    , bytestring              ^>=0.11.4.0
+    , containers              ^>=0.6.5.1
+    , data-default            <1
+    , discord-haskell         >=1.14      && <1.16
+    , edit-distance           <1
+    , exception-transformers  ^>=0.4
+    , extra                   >=1         && <2
+    , http-conduit            ^>=2.3
+    , load-env                <1
+    , megaparsec              >=9         && <10
+    , monad-logger            <1
+    , mtl                     ^>=2.2.2
+    , persistent              >=2.0       && <3
+    , persistent-sqlite       >=2         && <3
+    , process                 ^>=1.6.16.0
+    , random                  >=1         && <2
+    , raw-strings-qq          >=1         && <2
+    , regex-pcre              <1
+    , resource-pool           <1
+    , resourcet               >=1         && <2
+    , scientific              <1
+    , svg-builder             <1
+    , text                    ^>=1.2.5.0
+    , text-icu                <1
+    , th-printf               <1
+    , time                    ^>=1.11.1.1
+    , transformers            ^>=0.5.6.2
+    , unliftio                <1
+
+  hs-source-dirs:     src
+  default-language:   Haskell2010
+  ghc-options:        -fno-show-valid-hole-fits
+
+-- executable benjibot-core
+--     main-is:          Main.hs
+
+--     -- Modules included in this executable, other than Main.
+--     -- other-modules:
+--     other-extensions:
+--         BangPatterns DeriveGeneric LambdaCase LiberalTypeSynonyms
+--         DuplicateRecordFields ScopedTypeVariables TypeApplications
+
+--     build-depends:
+--         base ^>=4.16.4.0,
+--         mtl ^>=2.2.2,
+--         containers ^>=0.6.5.1,
+--         text ^>=1.2.5.0,
+--         transformers ^>=0.5.6.2,
+--         time ^>=1.11.1.1,
+--         bytestring ^>=0.11.4.0,
+--         process ^>=1.6.16.0
+
+--     hs-source-dirs:   app
+--     default-language: Haskell2010
