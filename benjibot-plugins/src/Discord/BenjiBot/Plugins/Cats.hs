@@ -1,3 +1,5 @@
+{-# LANGUAGE DeriveGeneric #-}
+
 -- |
 -- Module      : Discord.BenjiBot.Plugins.Cats
 -- Description : A very simple plugin that provides cat pictures.
@@ -30,7 +32,7 @@ data CatAPI = CatAPI
     width :: !Int,
     height :: !Int
   }
-  deriving (Show)
+  deriving (Show, Generic)
 
 instance FromJSON CatAPI
 
