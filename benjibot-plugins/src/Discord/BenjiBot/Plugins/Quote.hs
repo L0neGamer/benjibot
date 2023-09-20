@@ -1,4 +1,15 @@
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE DeriveGeneric #-}
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 
 -- |
@@ -336,7 +347,7 @@ renderCustomQuoteMessage t (Quote txt author submitter msgId cnlId dtm) qId mb m
     maybeAddFooter Nothing = ""
 
 quoteApplicationCommand :: CreateApplicationCommand
-quoteApplicationCommand = CreateApplicationCommandChatInput "quote" "store and retrieve quotes" (Just opts) Nothing True
+quoteApplicationCommand = CreateApplicationCommandChatInput "quote" Nothing "store and retrieve quotes" Nothing (Just opts) Nothing (Just True)
   where
     opts =
       OptionsSubcommands $
@@ -347,36 +358,39 @@ quoteApplicationCommand = CreateApplicationCommandChatInput "quote" "store and r
                 authorQuoteAppComm,
                 editQuoteAppComm
               ]
+    mkSubCommand nm desc = OptionSubcommand nm Nothing desc Nothing
+    mkString nm desc req = OptionValueString nm Nothing desc Nothing req (Left False) Nothing Nothing
+    mkIntReq nm desc auto mmin = OptionValueInteger nm Nothing desc Nothing True (Left auto) mmin Nothing
     addQuoteAppComm =
-      OptionSubcommand
+      mkSubCommand
         "add"
         "add a new quote"
-        [ OptionValueString "quote" "what the actual quote is" True (Left False),
-          OptionValueString "author" "who authored this quote" True (Left False)
+        [ mkString "quote" "what the actual quote is" True,
+          mkString "author" "who authored this quote" True
         ]
     showQuoteAppComm =
-      OptionSubcommand
+      mkSubCommand
         "show"
         "show a quote by number"
-        [ OptionValueInteger "id" "the quote's number" True (Left True) (Just 1) Nothing
+        [ mkIntReq "id" "the quote's number" True (Just 1)
         ]
     randomQuoteAppComm =
-      OptionSubcommand
+      mkSubCommand
         "random"
         "show a random quote"
         []
     authorQuoteAppComm =
-      OptionSubcommand
+      mkSubCommand
         "author"
         "show a random quote by an author"
-        [OptionValueString "author" "whose quotes do you want to see" True (Left False)]
+        [mkString "author" "whose quotes do you want to see" True]
     editQuoteAppComm =
-      OptionSubcommand
+      mkSubCommand
         "edit"
         "edit a quote"
-        [ OptionValueInteger "quoteid" "the id of the quote to edit" True (Left False) Nothing Nothing,
-          OptionValueString "quote" "what the actual quote is" False (Left False),
-          OptionValueString "author" "who authored this quote" False (Left False)
+        [ mkIntReq "quoteid" "the id of the quote to edit" False Nothing,
+          mkString "quote" "what the actual quote is" False,
+          mkString "author" "who authored this quote" False
         ]
 
 quoteApplicationCommandRecv :: Interaction -> DatabaseDiscord ()
@@ -468,12 +482,12 @@ quoteApplicationCommandRecv
         handleNothing
           (getValue "id" vals)
           ( \case
-              OptionDataValueInteger _ (Right showid') -> interactionResponseAutocomplete i $ InteractionResponseAutocompleteInteger [Choice (pack $ show showid') showid']
+              OptionDataValueInteger _ (Right showid') -> interactionResponseAutocomplete i $ InteractionResponseAutocompleteInteger [Choice (pack $ show showid') Nothing showid']
               OptionDataValueInteger _ (Left showid') -> do
                 allQ <- allQuotes ()
                 let allQ' = (\qe -> (show (fromSqlKey $ entityKey qe), (fromSqlKey $ entityKey qe, (\(Quote q _ _ _ _ _) -> q) (entityVal qe)))) <$> allQ
                     options = take 25 $ closestPairsWithCosts (def {deletion = 100, substitution = 100, transposition = 5}) allQ' (unpack showid')
-                interactionResponseAutocomplete i $ InteractionResponseAutocompleteInteger ((\(qids, (qid, _)) -> Choice (pack qids) (toInteger qid)) <$> options)
+                interactionResponseAutocomplete i $ InteractionResponseAutocompleteInteger ((\(qids, (qid, _)) -> Choice (pack qids) Nothing (toInteger qid)) <$> options)
               _ -> return ()
           )
       _ -> return ()
