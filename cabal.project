@@ -1,0 +1,5 @@
+packages: */*.cabal
+
+package benjibot-core
+
+package benjibot-plugins
