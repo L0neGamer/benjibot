@@ -1,10 +1,9 @@
-name: tablebot
-version: 0.3.3
-github: "WarwickTabletop/tablebot"
+name: benjibot
+version: 0.4
+github: "L0neGamer/benjibot"
 license: MIT
-author: "Warwick Tabletop"
-maintainer: "tagarople@gmail.com"
-copyright: "2021 Warwick Tabletop"
+author: "L0neGamer"
+copyright: "2023 L0neGamer"
 
 extra-source-files:
   - README.md
@@ -17,58 +16,58 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description: Please see the README on GitHub at <https://github.com/tagarople/tablebot#readme>
+description: Please see the README on GitHub at <https://github.com/l0negamer/benjibot#readme>
 
 dependencies:
 - base >= 4.7 && < 5
-- discord-haskell
-- emoji
-- text
-- text-icu
-- transformers
-- load-env
-- megaparsec
-- persistent
-- persistent-sqlite
-- persistent-template
-- random
-- esqueleto
-- monad-logger
-- time
-- aeson
-- bytestring
-- yaml
-- http-conduit
-- raw-strings-qq
-- template-haskell
-- timezone-olson
-- duckling
-- unordered-containers
-- bytestring
-- req
-- http-client
-- data-default
-- exception-transformers
-- resourcet
-- resource-pool
-- containers
-- th-printf
-- mtl
-- safe
-- edit-distance
-- unliftio
 - Chart
 - Chart-diagrams
+- JuicyPixels
+- aeson
+- bytestring
+- bytestring
+- containers
+- data-default
 - diagrams-core
 - diagrams-lib
 - diagrams-rasterific
-- JuicyPixels
-- split
-- regex-pcre
-- scientific
+- discord-haskell
 - distribution
+- duckling
+- edit-distance
+- emoji
+- esqueleto
+- exception-transformers
 - extra
+- http-client
+- http-conduit
+- load-env
+- megaparsec
+- monad-logger
+- mtl
+- persistent
+- persistent-sqlite
+- persistent-template
 - process
+- random
+- raw-strings-qq
+- regex-pcre
+- req
+- resource-pool
+- resourcet
+- safe
+- scientific
+- split
+- template-haskell
+- text
+- text-icu
+- th-printf
+- time
+- timezone-olson
+- transformers
+- unliftio
+- unordered-containers
+- yaml
 
 library:
   source-dirs: src
@@ -103,7 +102,7 @@ library:
 
 
 executables:
-  tablebot-exe:
+  benjibot-exe:
     main: Main.hs
     source-dirs: app
     ghc-options:
@@ -111,10 +110,10 @@ executables:
       - -rtsopts
       - "\"-with-rtsopts=-Iw10 -N\""
     dependencies:
-      - tablebot
+      - benjibot
 
 tests:
-  tablebot-test:
+  benjibot-test:
     main: Spec.hs
     source-dirs: test
     ghc-options:
@@ -122,4 +121,4 @@ tests:
       - -rtsopts
       - -with-rtsopts=-N
     dependencies:
-      - tablebot
+      - benjibot
