@@ -1,3 +1,5 @@
+{-# LANGUAGE DeriveFunctor #-}
+
 -- |
 -- Module      : Discord.BenjiBot.Plugins.Roll.Dice.DiceStatsBase
 -- Description : The basics for dice stats
@@ -108,31 +110,39 @@ scaledIntAxis' r@(minI, maxI) _ = makeAxis (_la_labelf lap) ((minI - 1) : (maxI 
 -- | Taken and modified from
 -- https://hackage.haskell.org/package/Chart-1.9.3/docs/src/Graphics.Rendering.Chart.Axis.Int.html#stepsInt
 stepsInt' :: Integer -> (Integer, Integer) -> [Integer]
-stepsInt' nSteps range = bestSize (goodness alt0) alt0 alts
+stepsInt' nSteps (minV, maxV) = bestSize (goodness alt0) alt0 alts
   where
-    bestSize n a (a' : as) =
+    bestSize n a (a' :|| as) =
       let n' = goodness a'
        in if n' < n then bestSize n' a' as else a
-    bestSize _ _ [] = []
 
     goodness vs = abs (genericLength vs - nSteps)
 
-    (alt0 : alts) = map (`steps` range) sampleSteps'
+    (alt0 :|| alts) = fmap steps sampleSteps'
 
     -- throw away sampleSteps that are definitely too small as
     -- they takes a long time to process
     sampleSteps' =
-      let rangeMag = (snd range - fst range)
-
-          (s1, s2) = span (< (rangeMag `div` nSteps)) sampleSteps
-       in (reverse . take 5 . reverse) s1 ++ s2
+      let rangeMag = maxV - minV
+          (s1, s2) = spanStream (< (rangeMag `div` nSteps)) sampleSteps
+       in mkStreamWith s2 ((reverse . take 5 . reverse) s1)
 
     -- generate all possible step sizes
-    sampleSteps = [1, 2, 5] ++ sampleSteps1
-    sampleSteps1 = [10, 20, 25, 50] ++ map (* 10) sampleSteps1
+    sampleSteps = mkStreamWith sampleSteps1 [1, 2, 5]
+    sampleSteps1 = flip mkStreamWith [10, 20, 25, 50] $ fmap (* 10) sampleSteps1
 
-    steps :: Integer -> (Integer, Integer) -> [Integer]
-    steps size' (minV, maxV) = takeWhile (< b) [a, a + size' ..] ++ [b]
+    steps :: Integer -> [Integer]
+    steps size' = takeWhile (< b) [a, a + size' ..] ++ [b]
       where
         a = floor @Double (fromIntegral minV / fromIntegral size') * size'
         b = ceiling @Double (fromIntegral maxV / fromIntegral size') * size'
+
+data Stream a = a :|| (Stream a) deriving (Functor)
+
+mkStreamWith :: Stream a -> [a] -> Stream a
+mkStreamWith = foldr (:||)
+
+spanStream :: (a -> Bool) -> Stream a -> ([a], Stream a)
+spanStream p (a :|| as)
+  | p a = first (a:) $ spanStream p as
+  | otherwise = ([], a :|| as)
