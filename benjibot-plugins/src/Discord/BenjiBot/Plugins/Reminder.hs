@@ -33,7 +33,17 @@ import Data.Time.Clock.System (getSystemTime, systemToUTCTime)
 import Data.Time.LocalTime (ZonedTime, zonedTimeToUTC)
 import Data.Time.LocalTime.TimeZone.Olson.Parse (getTimeZoneSeriesFromOlsonFile)
 import Data.Word (Word64)
-import Database.Esqueleto hiding (delete, insert)
+import Database.Esqueleto.Legacy
+    ( Entity(..),
+      PersistEntity(..),
+      BackendKey(..),
+      FieldDef(..),
+      (<=.),
+      (^.),
+      from,
+      select,
+      val,
+      where_ )
 import Database.Persist.TH
 import Discord.Types
 import Duckling.Core (Dimension (Time), Entity (value), Lang (EN), Region (GB), ResolvedVal (RVal), Seal (Seal), currentReftime, makeLocale, parse)
@@ -110,7 +120,7 @@ addReminder time content m = do
   sendMessage m ("Reminder " <> res <> " set for " <> toTimestamp time <> " with message `" <> pack content <> "`")
 
 -- @deleteReminder@ takes a reminder Id and deletes it from the list of awating reminders.
-deleteReminder :: WithError "Missing required argument" (Int) -> Message -> DatabaseDiscord ()
+deleteReminder :: WithError "Missing required argument" Int -> Message -> DatabaseDiscord ()
 deleteReminder (WErr rid) m = requirePermission Any m $ do
   delete k
   sendMessage m ("Reminder " <> pack (show rid) <> " deleted.")

@@ -10,7 +10,6 @@
 module Discord.BenjiBot.Plugins.Netrunner.Type.NrApi where
 
 import Data.Text (Text)
-import GHC.Generics (Generic)
 import Discord.BenjiBot.Plugins.Netrunner.Type.BanList (BanList)
 import Discord.BenjiBot.Plugins.Netrunner.Type.Card (Card)
 import Discord.BenjiBot.Plugins.Netrunner.Type.Cycle (Cycle)

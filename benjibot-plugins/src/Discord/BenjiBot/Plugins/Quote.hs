@@ -595,7 +595,7 @@ quotePlugin =
       onReactionAdds = [quoteReactionAdd],
       migrations = [quoteMigration],
       helpPages = [quoteHelp],
-      applicationCommands = [ApplicationCommandRecv quoteApplicationCommand quoteApplicationCommandRecv] ++ catMaybes [quoteMessageAppComm],
+      applicationCommands = ApplicationCommandRecv quoteApplicationCommand quoteApplicationCommandRecv : catMaybes [quoteMessageAppComm],
       onComponentRecvs = [randomQuoteComponentRecv, authorQuoteComponentRecv]
     }
 

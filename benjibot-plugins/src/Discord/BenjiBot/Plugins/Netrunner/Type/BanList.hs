@@ -12,10 +12,9 @@
 module Discord.BenjiBot.Plugins.Netrunner.Type.BanList where
 
 import Data.Aeson (FromJSON, parseJSON, withObject, (.:), (.:?))
-import Data.Map (Map, fromList)
+import Data.Map (Map)
 import Data.Maybe (fromMaybe)
 import Data.Text (Text)
-import GHC.Generics (Generic)
 
 -- | @BanList@ represents a single version of the Netrunner banlist.
 data BanList = BanList
@@ -65,7 +64,7 @@ instance FromJSON CardBan where
       return $ maybe False (/= 0) restriction
     banned <- do
       (limit :: Maybe Int) <- o .:? "deck_limit"
-      return $ maybe False (== 0) limit
+      return $ Just 0 == limit
     return $
       if
           | banned -> Banned
@@ -84,5 +83,5 @@ defaultBanList =
       name = "",
       active = False,
       dateStart = "",
-      affectedCards = fromList []
+      affectedCards = mempty
     }

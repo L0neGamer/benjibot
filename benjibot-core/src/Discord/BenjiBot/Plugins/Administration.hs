@@ -101,7 +101,7 @@ listBlacklist m = requirePermission Superuser m $ do
         len' :: Int
         len' = maximum $ map T.length p
     blacklisted :: [Entity PluginBlacklist] -> [Text]
-    blacklisted pbl = map (pack . pluginBlacklistLabel . entityVal) pbl
+    blacklisted = map (pack . pluginBlacklistLabel . entityVal)
     disableable :: Maybe (Char, Text) -> Bool
     disableable Nothing = False
     disableable (Just ('_', _)) = False
