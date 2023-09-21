@@ -11,7 +11,6 @@ module Discord.BenjiBot.Plugins.Netrunner.Type.Type where
 
 import Data.Aeson (FromJSON, parseJSON, withObject, (.:), (.:?))
 import Data.Text (Text)
-import GHC.Generics (Generic)
 
 -- | @Type@ represents a single card type in the NetrunnerDB API.
 data Type = Type

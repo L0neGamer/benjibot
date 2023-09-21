@@ -12,7 +12,6 @@ module Discord.BenjiBot.Plugins.Netrunner.Utility.NrApi (getNrApi) where
 import Data.Aeson (FromJSON, Value (Object), eitherDecode, parseJSON, (.:))
 import Data.Either (fromRight)
 import Data.Text (Text)
-import GHC.Generics (Generic)
 import Network.HTTP.Conduit (Response (responseBody), parseRequest)
 import Network.HTTP.Simple (httpLBS)
 import Discord.BenjiBot.Plugins.Netrunner.Type.BanList (BanList)
@@ -78,13 +77,13 @@ defaultCards = Cards {cardContent = [], imageUrlTemplate = ""}
 -- onwards. However, in the API draft isn't the 0th element in the list of
 -- cycles. It's the *fourth* (zero indexed).
 -- To avoid this weirdness propagating the order is fixed on import.
-data Cycles = Cycles {cycleContent :: [Cycle]} deriving (Show)
+newtype Cycles = Cycles {cycleContent :: [Cycle]} deriving (Show)
 
 instance FromJSON Cycles where
   parseJSON (Object v) = do
     content <- do
       cs <- v .: "data"
-      return $ (cs !! 4) : (take 4 cs) ++ (drop 5 cs)
+      return $ (cs !! 4) : take 4 cs ++ drop 5 cs
     return $ Cycles {cycleContent = content}
   parseJSON _ = return defaultCycles
 
@@ -92,7 +91,7 @@ defaultCycles :: Cycles
 defaultCycles = Cycles {cycleContent = []}
 
 -- | @Factions@ represents all factions in the game's.
-data Factions = Factions {factionContent :: [Faction]} deriving (Show)
+newtype Factions = Factions {factionContent :: [Faction]} deriving (Show)
 
 instance FromJSON Factions where
   parseJSON (Object v) = do
@@ -104,7 +103,7 @@ defaultFactions :: Factions
 defaultFactions = Factions {factionContent = []}
 
 -- | @Packs@ represents all data packs in the game's history.
-data Packs = Packs {packContent :: [Pack]} deriving (Show)
+newtype Packs = Packs {packContent :: [Pack]} deriving (Show)
 
 instance FromJSON Packs where
   parseJSON (Object v) = do
@@ -116,7 +115,7 @@ defaultPacks :: Packs
 defaultPacks = Packs {packContent = []}
 
 -- | @Types@ represents all card types in the game.
-data Types = Types {typeContent :: [Type]} deriving (Show)
+newtype Types = Types {typeContent :: [Type]} deriving (Show)
 
 instance FromJSON Types where
   parseJSON (Object v) = do
@@ -128,7 +127,7 @@ defaultTypes :: Types
 defaultTypes = Types {typeContent = []}
 
 -- | @BanLists@ represents all card types in the game.
-data BanLists = BanLists {banContent :: [BanList]} deriving (Show)
+newtype BanLists = BanLists {banContent :: [BanList]} deriving (Show)
 
 instance FromJSON BanLists where
   parseJSON (Object v) = do

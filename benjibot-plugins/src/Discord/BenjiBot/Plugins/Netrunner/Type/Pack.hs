@@ -11,7 +11,6 @@ module Discord.BenjiBot.Plugins.Netrunner.Type.Pack where
 
 import Data.Aeson (FromJSON, parseJSON, withObject, (.:))
 import Data.Text (Text)
-import GHC.Generics (Generic)
 
 -- | @Pack@ represents a single data pack in the NetrunnerDB API.
 data Pack = Pack

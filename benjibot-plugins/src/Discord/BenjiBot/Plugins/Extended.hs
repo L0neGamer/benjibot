@@ -11,12 +11,7 @@
 -- need to import @Tablebot.Plugins@ to import individual plugins.
 module Discord.BenjiBot.Plugins.Extended (allPlugins) where
 
-import Control.Concurrent.MVar (MVar)
-import Data.Text (Text)
-import Discord.BenjiBot.Internal.Administration (ShutdownReason)
-import Discord.BenjiBot.Internal.Plugins (compilePlugin)
 import Discord.BenjiBot.Internal.Types (CompiledPlugin (..))
-import Discord.BenjiBot.Plugins.Administration (administrationPlugin)
 import Discord.BenjiBot.Plugins.Alias (alias)
 import Discord.BenjiBot.Plugins.Basic (basic)
 import Discord.BenjiBot.Plugins.Cats (cat)

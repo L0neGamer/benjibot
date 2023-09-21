@@ -11,7 +11,6 @@ module Discord.BenjiBot.Plugins.Netrunner.Type.Cycle where
 
 import Data.Aeson (FromJSON, parseJSON, withObject, (.:))
 import Data.Text (Text)
-import GHC.Generics (Generic)
 
 -- | @Cycle@ represents a single cycle of packs in the NetrunnerDB API.
 data Cycle = Cycle

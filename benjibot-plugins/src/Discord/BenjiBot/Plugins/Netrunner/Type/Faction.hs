@@ -11,7 +11,6 @@ module Discord.BenjiBot.Plugins.Netrunner.Type.Faction where
 
 import Data.Aeson (FromJSON, parseJSON, withObject, (.:))
 import Data.Text (Text)
-import GHC.Generics (Generic)
 
 -- | @Faction@ represents a Netrunner faction.
 data Faction = Faction
