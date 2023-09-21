@@ -1,0 +1,18 @@
+
+resolver: lts-18.28
+
+packages:
+  - .
+
+extra-deps:
+- discord-haskell-1.15.3
+- emoji-0.1.0.2
+- load-env-0.2.1.0
+- megaparsec-9.0.1
+- persistent-2.11.0.4
+- persistent-sqlite-2.11.1.0
+- persistent-template-2.9.1.0@rev:2
+- esqueleto-3.4.1.1
+- dependent-sum-0.7.1.0
+- constraints-extras-0.3.1.0
+- monoid-extras-0.6.1

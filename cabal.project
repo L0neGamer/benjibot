@@ -1,0 +1,15 @@
+packages: */*.cabal
+
+package benjibot-core
+
+package benjibot-plugins
+
+source-repository-package
+  type: git
+  location: https://github.com/L0neGamer/duckling.git
+  tag: 605b0a56c020b2bc0a77e584daac46d7155bea9b
+
+source-repository-package
+  type: git
+  location: https://github.com/L0neGamer/haskell-distribution.git
+  tag: 569d6452e4bffedb2c0d3795885fccdb22a4d29d
