@@ -1,3 +1,5 @@
+{-# LANGUAGE DeriveGeneric #-}
+
 -- |
 -- Module      : Discord.BenjiBot.Plugins.Welcome
 -- Description : A plugin for generating welcome messages.
@@ -61,9 +63,9 @@ data CategoryClass = CategoryClass
     interrogative :: !(Maybe String),
     values :: ![String]
   }
-  deriving (Show)
+  deriving (Show, Generic)
 
-newtype FileData = FileData {classes :: [CategoryClass]} deriving (Show)
+newtype FileData = FileData {classes :: [CategoryClass]} deriving (Show, Generic)
 
 instance FromJSON CategoryClass
 
