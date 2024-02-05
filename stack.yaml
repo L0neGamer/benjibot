@@ -50,7 +50,6 @@ extra-deps:
 - persistent-sqlite-2.11.1.0
 - persistent-template-2.9.1.0@rev:2
 - esqueleto-3.4.1.1
-- duckling-0.2.0.0
 - dependent-sum-0.7.1.0
 - constraints-extras-0.3.1.0
 - Chart-diagrams-1.9.3
@@ -64,10 +63,13 @@ extra-deps:
 - dual-tree-0.2.3.0
 - monoid-extras-0.6.1
 - statestack-0.3
+- snap-server-1.1.2.1
 - diagrams-rasterific-1.4.2.2
 # - distribution-1.1.1.1
 - git: https://github.com/L0neGamer/haskell-distribution.git
   commit: 569d6452e4bffedb2c0d3795885fccdb22a4d29d
+- git: https://github.com/L0neGamer/duckling.git
+  commit: ba3f5642470b37868c4a0747686b2b158024edf4
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
@@ -92,3 +94,4 @@ extra-deps:
 #
 # Allow a newer minor version of GHC than the snapshot specifies
 # compiler-check: newer-minor
+allow-newer: true
