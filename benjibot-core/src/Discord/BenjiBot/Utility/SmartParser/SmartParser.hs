@@ -23,7 +23,7 @@ import Data.Scientific ()
 import Data.String (IsString (fromString))
 import Data.Text (Text, pack)
 import Discord.Interactions ()
-import Discord.Types (Message, Snowflake (Snowflake))
+import Discord.Types (Message, Snowflake (Snowflake), DiscordId (DiscordId))
 import GHC.TypeLits (KnownSymbol, symbolVal)
 import Discord.BenjiBot.Utility.Discord (sendCustomMessage)
 import Discord.BenjiBot.Utility.Parser
@@ -205,6 +205,9 @@ instance CanParse () where
 
 instance CanParse Snowflake where
   pars = Snowflake . fromInteger <$> posInteger
+
+instance CanParse (DiscordId id) where
+  pars = DiscordId <$> pars
 
 instance IsString a => CanParse (RestOfInput a) where
   pars = ROI . fromString <$> untilEnd
