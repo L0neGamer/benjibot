@@ -32,12 +32,10 @@ import Data.Text (Text, pack, unpack)
 import Data.Time.Clock.System (getSystemTime, systemToUTCTime)
 import Data.Time.LocalTime (ZonedTime, zonedTimeToUTC)
 import Data.Time.LocalTime.TimeZone.Olson.Parse (getTimeZoneSeriesFromOlsonFile)
-import Data.Word (Word64)
 import Database.Esqueleto.Legacy
     ( Entity(..),
       PersistEntity(..),
       BackendKey(..),
-      FieldDef(..),
       (<=.),
       (^.),
       from,
@@ -62,9 +60,9 @@ share
   [mkPersist sqlSettings, mkMigrate "reminderMigration"]
   [persistLowerCase|
 Reminder
-    reminderCid Word64
-    reminderMid Word64
-    user Word64
+    reminderCid ChannelId
+    reminderMid MessageId
+    user UserId
     time UTCTime
     content String
     deriving Show
@@ -112,10 +110,7 @@ reminderParser (WErr (Qu content, ROI rawString)) m = do
 -- currently ignores the user's timezone... (TODO fix)
 addReminder :: UTCTime -> String -> Message -> DatabaseDiscord ()
 addReminder time content m = do
-  let (Snowflake cid) = unId $ messageChannelId m
-      (Snowflake mid) = unId $ messageId m
-      (Snowflake uid) = unId $ userId $ messageAuthor m
-  added <- insert $ Reminder cid mid uid time content
+  added <- insert $ Reminder (messageChannelId m) (messageId m) (userId (messageAuthor m)) time content
   let res = pack $ show $ fromSqlKey added
   sendMessage m ("Reminder " <> res <> " set for " <> toTimestamp time <> " with message `" <> pack content <> "`")
 
@@ -153,13 +148,13 @@ reminderCron = do
     let (Reminder cid mid uid _time content) = entityVal re
      in do
           liftIO . print $ entityVal re
-          res <- getMessage (DiscordId $ Snowflake cid) (DiscordId $ Snowflake mid)
+          res <- getMessage cid mid
           case res of
             Left _ -> do
-              sendChannelMessage (fromIntegral cid) (pack $ "Reminder to <@" ++ show uid ++ ">! " ++ content)
+              sendChannelMessage cid (pack $ "Reminder to <@" ++ show uid ++ ">! " ++ content)
               delete (entityKey re)
             Right mess -> do
-              sendCustomReplyMessage mess (DiscordId $ Snowflake mid) True $
+              sendCustomReplyMessage mess mid True $
                 pack $
                   "Reminder to <@" ++ show uid ++ ">! " ++ content
               delete (entityKey re)
