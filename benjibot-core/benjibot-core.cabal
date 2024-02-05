@@ -83,12 +83,12 @@ library
     TypeApplications
 
   build-depends:
-    , aeson                   ^>=2
+    , aeson                   >2.1        && <2.3
     , base                    >=4.15      && <4.18
     , bytestring              ^>=0.11.4.0
     , containers              ^>=0.6.5.1
     , data-default            <1
-    , discord-haskell         >=1.14      && <1.16
+    , discord-haskell         >=1.16      && <1.17
     , edit-distance           <1
     , exception-transformers  ^>=0.4
     , extra                   >=1         && <2
@@ -107,15 +107,15 @@ library
     , resourcet               >=1         && <2
     , scientific              <1
     , svg-builder             <1
-    , text                    ^>=1.2.5.0
+    , text                    >=2         && <2.2
     , text-icu                <1
     , th-printf               <1
-    , time                    ^>=1.11.1.1
+    , time                    >1.10       && <1.13
     , transformers            ^>=0.5.6.2
     , unliftio                <1
 
   hs-source-dirs:     src
-  default-language:   Haskell2010
+  default-language:   GHC2021
   ghc-options:        -Wall -fno-show-valid-hole-fits
 
 -- executable benjibot-core
