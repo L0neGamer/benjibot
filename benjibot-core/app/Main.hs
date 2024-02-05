@@ -3,13 +3,14 @@
 module Main where
 
 import Data.Text (Text)
-import Tablebot (BotConfig (..), runTablebotWithEnv)
-import Tablebot.Plugins (allPlugins)
+import Discord.BenjiBot (BotConfig (..), runBenjiBotWithEnv)
+import Discord.BenjiBot.Plugins.Administration
+import Discord.BenjiBot.Plugins
 
 -- @main@ runs forever. This allows bot reloading by fully shutting down the bot and letting it restart.
 main :: IO ()
 main =
-  runTablebotWithEnv allPlugins $
+  runBenjiBotWithEnv basicPlugins $
     BotConfig
       { gamePlaying = game,
         rootHelpText = rootBody
@@ -20,6 +21,6 @@ game prefix = "with dice. Prefix is `" <> prefix <> "`. Call `" <> prefix <> "he
 
 rootBody :: Text
 rootBody =
-  "**Tabletop Bot**\n\
+  "**BenjiBot**\n\
   \This friendly little bot provides several tools to help with\
-  \ the running of the Warwick Tabletop Games and Role-Playing Society Discord server."
+  \ the running of this server."

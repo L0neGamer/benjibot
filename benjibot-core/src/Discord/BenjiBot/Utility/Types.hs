@@ -357,7 +357,7 @@ instance Context Message where
 
 instance Context Interaction where
   -- this is safe to do because we are guaranteed to get either a user or a member
-  contextUserId i = maybe 0 userId (either memberUser Just mor)
+  contextUserId i = maybe nullaryId userId (either memberUser Just mor)
     where
       (MemberOrUser mor) = interactionUser i
   contextGuildId i = return $ interactionGuildId i
@@ -367,3 +367,7 @@ instance Context Interaction where
   contextMessageId InteractionComponent {interactionMessage = m} = return $ messageId m
   contextMessageId InteractionApplicationCommand {applicationCommandData = ApplicationCommandDataMessage {..}} = return applicationCommandDataTargetMessageId
   contextMessageId _ = Nothing
+
+-- | Should only be used where there's no chance of it actually being sent to discord in a meaningful way
+nullaryId :: DiscordId a
+nullaryId = (DiscordId (Snowflake 0))
