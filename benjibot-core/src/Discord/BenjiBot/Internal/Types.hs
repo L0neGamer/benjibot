@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -fno-warn-orphans #-} -- for the discordid instances
+
 -- |
 -- Module      : Discord.BenjiBot.Internal.Types
 -- Description : Non-public types used throughout the rest of the implementation.
@@ -15,6 +17,7 @@ import Control.Concurrent.MVar (MVar)
 import Control.Monad.Reader (ReaderT)
 import Data.Default (Default)
 import Data.Text (Text)
+import qualified Data.Text as T
 import Database.Persist.Sqlite
 import Discord
 import Discord.Interactions (CreateApplicationCommand, Interaction)
@@ -127,8 +130,17 @@ instance PersistField AliasType where
   toPersistValue AliasPublic = PersistInt64 (-1)
   fromPersistValue = \case
     PersistInt64 (-1) -> Right AliasPublic
-    PersistInt64 i -> Right $ AliasPrivate (fromIntegral i)
-    _ -> Left "AliasType: fromPersistValue: Invalid value"
+    PersistInt64 i -> Right $ AliasPrivate (DiscordId (Snowflake (fromIntegral i)))
+    v -> Left ("AliasType: fromPersistValue: Invalid value: " <> T.pack (show v))
 
 instance PersistFieldSql AliasType where
+  sqlType _ = SqlInt64
+
+instance PersistField (DiscordId a) where
+  toPersistValue (DiscordId (Snowflake wd)) = PersistInt64 (fromIntegral wd)
+  fromPersistValue = \case
+    PersistInt64 i -> Right $ DiscordId (Snowflake (fromIntegral i))
+    v -> Left ("fromPersistValue: Invalid value: " <> T.pack (show v))
+
+instance PersistFieldSql (DiscordId a) where
   sqlType _ = SqlInt64

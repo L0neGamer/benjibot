@@ -145,13 +145,7 @@ runBenjiBot vinfo dToken prefix dbpath plugins config =
     activityStatus =
       UpdateStatusOpts
         { updateStatusOptsSince = Nothing,
-          updateStatusOptsGame =
-            Just
-              ( def
-                  { activityName = gamePlaying config prefix,
-                    activityType = ActivityTypeGame
-                  }
-              ),
+          updateStatusOptsActivities = [mkActivity (gamePlaying config prefix) ActivityTypeGame],
           updateStatusOptsNewStatus = UpdateStatusOnline,
           updateStatusOptsAFK = False
         }
