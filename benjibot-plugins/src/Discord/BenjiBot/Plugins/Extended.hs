@@ -8,7 +8,7 @@
 --
 -- Here is a collection of existing plugins for Discord.BenjiBot. If you add new plugins
 -- to the Plugins directory, include an import here. This means that users only
--- need to import @Tablebot.Plugins@ to import individual plugins.
+-- need to import @BenjiBot.Plugins@ to import individual plugins.
 module Discord.BenjiBot.Plugins.Extended (allPlugins) where
 
 import Discord.BenjiBot.Internal.Types (CompiledPlugin (..))

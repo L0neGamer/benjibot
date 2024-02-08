@@ -39,19 +39,15 @@ basicCommands =
     ( "about",
       aboutStr,
       Simple ("some information about the bot", "Some information about the bot, including how you can get involved")
-    ),
-    ( "inventory",
-      "Here's the board games we possess! -> https://www.warwicktabletop.co.uk/inventory/boardgames/",
-      Simple ("our board games inventory", "Our board games inventory, with a link to the actual inventory")
     )
   ]
   where
     aboutStr =
-      [r|This bot was created by finnbar to replace a couple of other bots in Tabletop.
-It's written in Haskell, and you can find the code here: <https://github.com/WarwickTabletop/tablebot>.
+      [r|This bot was created to replace a couple of other bots in its original server.
+It's written in Haskell, and you can find the code here: <https://github.com/l0negamer/benjibot>.
 If you would like to contribute, there are setup guides and a contributor's guide to help you get started!
 
-If you have found a bug, please report it on Github (<https://github.com/WarwickTabletop/tablebot/issues>) or inform one of the maintainers.|]
+If you have found a bug, please report it on Github (<https://github.com/l0negamer/benjibot/issues>) or inform one of the maintainers.|]
 
 -- | @echo@ pulled out to help resolve parser overlapping instances errors.
 -- Sends the provided text, regardless of received message.
@@ -74,7 +70,7 @@ type BasicInlineCommand = (Text, Text)
 
 basicInlineCommands :: [BasicInlineCommand]
 basicInlineCommands =
-  [ ("thank you tablebot", "You're welcome!")
+  [ ("thank you benjibot", "You're welcome!")
   ]
 
 baseInlineCommand :: BasicInlineCommand -> InlineCommand

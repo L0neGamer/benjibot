@@ -1,10 +1,12 @@
-# tablebot
+# benjibot
 
-[![CI](https://github.com/WarwickTabletop/tablebot/actions/workflows/main.yml/badge.svg)](https://github.com/WarwickTabletop/tablebot/actions/workflows/main.yml)
+[![CI](https://github.com/l0negamer/benjibot/actions/workflows/main.yml/badge.svg)](https://github.com/l0negamer/benjibot/actions/workflows/main.yml)
 
-An extendable Discord bot framework written on top of [`discord-haskell`](https://github.com/aquarial/discord-haskell).
+An extendable Discord bot framework written on top of [`discord-haskell`](https://github.com/discord-haskell/discord-haskell).
 
 If you're new to this project, or completely new to git, and Haskell, you might be interested in looking at the [Setup from Scratch](SETUP.md) guide. If you want to contribute, please consult the [contributor's guide](CONTRIBUTING.md). If you want tutorials on making your first plugin or how exceptions work, checkout the tutorials in the [tutorials](tutorials) folder.
+
+This is a refactor, fork, and continuation of the wonderful and glorious [Tablebot](https://github.com/WarwickTabletop/tablebot).
 
 ## Environment file setup
 

@@ -52,7 +52,9 @@ import Discord.BenjiBot.Internal.Administration
 import Discord.BenjiBot.Internal.Plugins
 import Discord.BenjiBot.Internal.Types
 import Discord.BenjiBot.Plugins (addAdministrationPlugin)
-import Discord.BenjiBot.Utility
+import Discord.BenjiBot.Utility.Types
+    ( VersionInfo(VInfo), BenjiBotCache(Cache) )
+import Discord.BenjiBot.Utility.Utils ( debugPrint )
 import Discord.BenjiBot.Utility.Help (generateHelp)
 import Discord.BenjiBot.Utility.Font (makeFontMap)
 import Text.Regex.PCRE ((=~))
