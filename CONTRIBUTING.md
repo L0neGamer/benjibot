@@ -1,18 +1,16 @@
 # Contributing
 
-Welcome to the [University of Warwick Tabletop and Roleplaying Society](https://warwicktabletop.co.uk)'s Discord server bot! You can join our Discord server [here](https://warwicktabletop.co.uk/discord)! You can access the channel for developer discussion by giving yourself the @computer_person role.
+Welcome to BenjiBot!
 
 Please feel free to contribute to the code in whatever way you are able. We're more than happy to accept new code, bug fixes, documentation, issues, and anything else you think will improve the bot! If you do start work on an issue, please first let us know in the issue's thread or in our Discord server to avoid competing pull requests.
 
-**Our society has a [Code of Conduct](https://www.warwicktabletop.co.uk/page/codeofconduct/). We expect it to be upheld by contributors in all our online spaces the same way we'd expect it to be upheld by attendees of our events.**
-
 ## What can I contribute?
 
-We're happy to accept any contribution, big or small. You can find our list of issues [here](https://github.com/WarwickTabletop/tablebot/issues), which details bugs and feature requests. Both code (with documentation) and documentation alone is accepted - we want this project to be as accessible as possible, so any contributions must come with documentation or add documentation.
+We're happy to accept any contribution, big or small. You can find our list of issues [here](https://github.com/l0negamer/benjibot/issues), which details bugs and feature requests. Both code (with documentation) and documentation alone is accepted - we want this project to be as accessible as possible, so any contributions must come with documentation or add documentation.
 
 If you think of a feature you'd like added or find a bug in the current implementation please do create a new ticket! There's no obligation to implement the issue. If you don't have any ideas but do want to get involved with programming you can check the issues page for new features and fixes to work on. If you're not too familiar with Haskell or our codebase, look out for the "good first issue" label. We put this on issues that we think would be good for newcomers to the language/project to get started on.
 
-If you have trouble at any time, please do ask for help in an issue thread or on our Discord. The maintainers generally communicate in the [Tabletop Discord server](https://warwicktabletop.co.uk/discord). The channel we use, #computers-were-a-mistake, is opt-in so you'll need to give yourself the @computer_person role in #roles. Finally, you can also check out the [tutorials](tutorials) in the repository and pre-existing solutions in the code for guidance.
+If you have trouble at any time, please do ask for help in an issue thread.
 
 ## How to contribute
 
@@ -27,6 +25,8 @@ If you'd like to contribute code, these are the steps you'll need to follow alon
 
 You can check out the [README](README.md) for a brief overview on how to set up a local bot for testing. If you've never done something like this before, see [SETUP.md](SETUP.md).
 
+Note that since many of these instructions were written, the basic bot structure has been broken up, so theoretically all you should need to do is depend on benjibot-core and write your own plugins and executable.
+
 ### Writing good Pull Requests (PRs)
 
 Writing good PRs is hard. As such, here are some important points to consider when writing your PR to make it easier for the reviewer.
@@ -39,7 +39,7 @@ Writing good PRs is hard. As such, here are some important points to consider wh
 * **Remember the plugin writer as well as the end user.** If you've written something that changes how plugins are written, update existing tutorials or add new ones. Make sure that the API you're defining is clear and easy to use, so doesn't put too much burden on someone writing a plugin.
 * **Try to keep your PR small.** If you can split your work into multiple PRs, please do - the smaller a PR is, the more likely your reviewer will be able to understand it and thus accept it.
 
-If you follow these steps, it becomes much easier for the reviewer to understand your code and thus feel confident about accepting it. This also allows the reviewer to make more helpful suggestions about the code itself - both allowing them to verify that the code does what you say it does, and that you've implemented it in a helpful way. The review process should help you write better code as well as making Tablebot as a whole better.
+If you follow these steps, it becomes much easier for the reviewer to understand your code and thus feel confident about accepting it. This also allows the reviewer to make more helpful suggestions about the code itself - both allowing them to verify that the code does what you say it does, and that you've implemented it in a helpful way. The review process should help you write better code as well as making BenjBot as a whole better.
 
 ### Ormolu
 

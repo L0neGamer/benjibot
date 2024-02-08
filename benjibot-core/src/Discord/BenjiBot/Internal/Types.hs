@@ -118,7 +118,7 @@ data BotConfig = BotConfig
 instance Default BotConfig where
   def =
     BotConfig
-      { rootHelpText = "This bot is built off the Discord.BenjiBot framework (<https://github.com/WarwickTabletop/tablebot>).",
+      { rootHelpText = "This bot is built off the BenjiBot framework (<https://github.com/l0negamer/benjibot>).",
         gamePlaying = const "Kirby: Planet Robobot"
       }
 

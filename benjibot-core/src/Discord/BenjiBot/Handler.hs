@@ -115,7 +115,7 @@ killCron :: [ThreadId] -> IO ()
 killCron = mapM_ killThread
 
 -- | Given a list of compiled application commands and a pointer to the
--- tablebot cache, create the given application commands, purge ones that
+-- benjibot cache, create the given application commands, purge ones that
 -- weren't created by us, and place the application command id's and their
 -- actions in the cache.
 submitApplicationCommands :: [CompiledApplicationCommand] -> MVar BenjiBotCache -> DiscordHandler ()

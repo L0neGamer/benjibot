@@ -166,7 +166,7 @@ reminderHelp =
     []
     "ask the bot to remind you to do things in the future"
     [r|**Reminders**
-Send a reminder to yourself or others. Pick a date and time, and the tablebot will poke you to remember at your preordained moment.
+Send a reminder to yourself or others. Pick a date and time, and BenjiBot will poke you to remember at your preordained moment.
 
 Uses duckling (<https://github.com/facebook/duckling>) to parse time and dates, and thus is quite flexible, if you want to use natural language for example.
 

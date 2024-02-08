@@ -1,14 +1,14 @@
 # Setup from Scratch
 
-This document details the setup process of downloading a development copy of Tablebot.
+This document details the setup process of downloading a development copy of BenjiBot.
 This was originally authored by Benji (Git won't reflect this as it was taken out of CONTRIBUTING.md).
 
-If at any point something doesn't work, restart your computer first and try it again. If the problem persists please feel free to ask for help in the [Discord server](https://www.warwicktabletop.co.uk/discord/). Sections are marked depending on what OS they rely on, if any.
+If at any point something doesn't work, restart your computer first and try it again. If the problem persists please feel free to ask for help in github's issues. Sections are marked depending on what OS they rely on, if any.
 
 1. git, wsl, and vscode setup
     1. github
         1. Create a GitHub account
-        2. Go to <https://github.com/WarwickTabletop/tablebot>
+        2. Go to <https://github.com/l0negamer/benjibot>
         3. Click fork on the repo (should be top right) (this creates your own version of the repo)
         4. Take note of the url that your forked repo is on
     2. wsl and git (Windows)
@@ -28,7 +28,7 @@ If at any point something doesn't work, restart your computer first and try it a
         3. From a terminal opened in the project folder, type `code .`
         4. There should soon be a window which has all the folders and files open on the left hand side
 2. Haskell setup
-    1. In any linux terminal window (wsl or the linux terminal itself), type `curl -sSL https://get.haskellstack.org/ | sh`, allowing sudo access and providing passwords as needed
+    1. In any linux terminal window (wsl or the linux terminal itself), install ghcup and stack via https://www.haskell.org/ghcup/
     2. In the linux terminal window opened from the project folder (or the terminal open in the vscode window) run `stack build`, and then wait until it's done
     3. This will take a long time
     4. Make some tea, or maybe some coffee or hot chocolate
@@ -41,6 +41,6 @@ If at any point something doesn't work, restart your computer first and try it a
     3. To run the bot, type `stack run` into the terminal, and the bot will start to run
     4. Make sure to invite the bot to a server so you can test it out!
 
-Congratulations, you now know the very basics needed to set up your own tablebot!
+Congratulations, you now know the very basics needed to set up your own BenjiBot!
 
 To learn more about git, you should look up a tutorial or watch this video: <https://youtu.be/HOIC804Berc>

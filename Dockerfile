@@ -1,7 +1,6 @@
-# stack resolver 18.18 uses ghc 8.10.7
-FROM haskell:8.10.7 as build
-RUN mkdir -p /tablebot/build
-WORKDIR /tablebot/build
+FROM haskell:9.4.8 as build
+RUN mkdir -p /benjbot/build
+WORKDIR /benjbot/build
 
 # system lib dependencies
 RUN apt-get update -qq && \
@@ -13,9 +12,9 @@ COPY . .
 
 RUN stack build --system-ghc
 
-RUN mv "$(stack path --local-install-root --system-ghc)/bin" /tablebot/build/bin
+RUN mv "$(cabal path --local-install-root)/bin" /benjbot/build/bin
 
-FROM haskell:8.10.7-slim as app
+FROM haskell:9.4.8-slim as app
 
 # system runtime deps
 RUN apt-get update -qq && \
@@ -23,12 +22,12 @@ RUN apt-get update -qq && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir -p /tablebot
-WORKDIR /tablebot
+RUN mkdir -p /benjbot
+WORKDIR /benjbot
 
-COPY --from=build /tablebot/build/bin .
+COPY --from=build /benjibot/build/bin .
 # apparently we need the .git folder
 COPY .git .git 
 # we need fonts for the roll stats
 COPY fonts fonts
-CMD /tablebot/tablebot-exe
+CMD /benjibot/benjibot-exe
