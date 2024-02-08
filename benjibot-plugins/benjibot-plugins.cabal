@@ -125,6 +125,7 @@ library
     , raw-strings-qq          >=1         && <2
     , scientific              <1
     , split                   <1
+    , SVGFonts                ^>=1.8
     , svg-builder             <1
     , text                    >=2         && <2.2
     , text-icu                <1

@@ -54,6 +54,7 @@ import Discord.BenjiBot.Internal.Types
 import Discord.BenjiBot.Plugins (addAdministrationPlugin)
 import Discord.BenjiBot.Utility
 import Discord.BenjiBot.Utility.Help (generateHelp)
+import Discord.BenjiBot.Utility.Font (makeFontMap)
 import Text.Regex.PCRE ((=~))
 import UnliftIO.Concurrent
 
@@ -117,7 +118,8 @@ runBenjiBot vinfo dToken prefix dbpath plugins config =
       mapM_ (\migration -> runSqlPool (runMigration migration) pool) $ combinedMigrations plugin
       -- Create a var to kill any ongoing tasks.
       mvar <- newEmptyMVar
-      cacheMVar <- newMVar (Discord.BenjiBot.Utility.Cache M.empty M.empty vinfo)
+      fm <- NoLoggingT makeFontMap
+      cacheMVar <- newMVar (Discord.BenjiBot.Utility.Cache M.empty M.empty vinfo fm)
       userFacingError <-
         NoLoggingT $
           runDiscord $

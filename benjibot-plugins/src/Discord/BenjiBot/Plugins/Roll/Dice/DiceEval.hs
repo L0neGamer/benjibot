@@ -23,7 +23,7 @@ import Discord.BenjiBot.Plugins.Roll.Dice.DiceData
 import Discord.BenjiBot.Plugins.Roll.Dice.DiceFunctions (FuncInfoBase (..), ListInteger (..))
 import Discord.BenjiBot.Plugins.Roll.Dice.DiceParsing ()
 import Discord.BenjiBot.Utility.Discord (Format (..), formatInput, formatText)
-import Discord.BenjiBot.Utility.Exception (BotException (EvaluationException), catchBot, throwBot)
+import Discord.BenjiBot.Utility.Exception (BotException (EvaluationException), catchBot, evaluationException, throwBot)
 import Discord.BenjiBot.Utility.Parser (ParseShow (parseShow))
 import Discord.BenjiBot.Utility.Random (chooseOne)
 
@@ -64,10 +64,6 @@ checkRNGCount :: ProgramStateM ()
 checkRNGCount = do
   rngCount <- gets getRNGCount
   when (rngCount > maximumRNG) $ evaluationException ("Maximum RNG count exceeded (" <> pack (show maximumRNG) <> ")") []
-
--- | Utility function to throw an `EvaluationException` when using `Text`.
-evaluationException :: (MonadException m) => Text -> [Text] -> m a
-evaluationException nm locs = throwBot $ EvaluationException (unpack nm) (unpack <$> locs)
 
 --- Evaluating an expression. Uses IO because dice are random
 
