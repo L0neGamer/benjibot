@@ -19,7 +19,8 @@ maintainer:         benjaminbwm@gmail.com
 -- A copyright notice.
 -- copyright:
 -- category:
-extra-source-files: CHANGELOG.md
+-- extra-source-files: CHANGELOG.md
+tested-with: GHC == 9.4
 
 library
   exposed-modules:
