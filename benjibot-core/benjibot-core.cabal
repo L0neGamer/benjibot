@@ -44,6 +44,7 @@ library
     Discord.BenjiBot.Utility.Discord
     Discord.BenjiBot.Utility.Embed
     Discord.BenjiBot.Utility.Exception
+    Discord.BenjiBot.Utility.Font
     Discord.BenjiBot.Utility.Help
     Discord.BenjiBot.Utility.Parser
     Discord.BenjiBot.Utility.Permission
@@ -86,12 +87,14 @@ library
     , aeson                   >=2.1.0     && <2.3
     , base                    >=4.15      && <4.18
     , bytestring              ^>=0.11.4.0
+    , Chart                   >=1         && <2
     , containers              ^>=0.6.5.1
     , data-default            <1
     , discord-haskell         >=1.16      && <1.17
     , edit-distance           <1
     , exception-transformers  ^>=0.4
     , extra                   >=1         && <2
+    , filepath                ^>=1.4
     , http-conduit            ^>=2.3
     , load-env                <1
     , megaparsec              >=9         && <10
@@ -107,6 +110,7 @@ library
     , resourcet               >=1         && <2
     , scientific              <1
     , svg-builder             <1
+    , SVGFonts                ^>=1.8
     , text                    >=2         && <2.2
     , text-icu                <1
     , th-printf               <1
